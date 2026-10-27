@@ -561,6 +561,22 @@ area.innerHTML = `
         </p>
 
         <p>Empresa autorizada na Venzuno.</p>
+        
+<div style="margin-top:20px">
+  <h3>Benefícios cadastrados</h3>
+
+  ${beneficios
+    .filter(b => b.company_id === empresa.company_id)
+    .map(b => `
+      <div style="padding:16px;margin-top:12px;border:1px solid #dce4f2;border-radius:14px">
+        <strong>${safe(b.title)}</strong>
+        <p>Desconto: ${Number(b.discount_percent ?? 0)}%</p>
+        <p>${safe(b.conditions || "Sem condições adicionais.")}</p>
+        <p>Status: ${b.active ? "Ativo" : "Inativo"}</p>
+      </div>
+    `).join("") || "<p>Nenhum benefício cadastrado.</p>"}
+</div>
+
 
         <p style="font-size:13px">
           A validação de benefícios será liberada
