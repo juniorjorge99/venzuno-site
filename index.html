@@ -516,11 +516,10 @@ async function abrirPainelEmpresarial() {
       return;
     }
 
-    const { data, error } = await venzunoAuth
-      .from("company_staff")
-      .select("company_id, role, active")
-      .eq("user_id", usuario.id)
-      .eq("active", true);
+   
+const { data, error } = await venzunoAuth
+  .rpc("minhas_empresas_venzuno");
+
 
     if (error) throw error;
 
