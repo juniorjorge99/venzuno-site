@@ -533,8 +533,16 @@ const { data, error } = await venzunoAuth
       return;
     }
 
-  
+  const { data: beneficios, error: erroBeneficios } =
+  await venzunoAuth.rpc("meus_beneficios_venzuno");
+
+if (erroBeneficios) throw erroBeneficios;
+
 area.innerHTML = `
+  <div class="detail-card">
+    <h2>Minhas empresas</h2>
+
+    area.innerHTML = `
   <div class="detail-card">
     <h2>Minhas empresas</h2>
     <p>Gerencie seus estabelecimentos parceiros.</p>
