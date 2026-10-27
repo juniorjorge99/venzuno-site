@@ -362,9 +362,112 @@ member="";
 localStorage.removeItem("venzuno_demo_member");
 renderRegister();
 }
-function renderCard(){
-document.getElementById("cardBody").innerHTML=member?`<div class="digital"><div class="brand"><span class="mark">V</span>venzuno<span class="dot">.</span></div><div class="member">${safe(member)}</div><small>ASSOCIADO • DEMONSTRAÇÃO</small><div class="number">VNZ-DEMO-0001</div></div><div class="detail-card" style="margin-top:20px"><h2>Suas vantagens</h2><p>Conheça as empresas participantes e seus benefícios.</p><button class="btn primary full" onclick="go('companies')">Explorar empresas →</button></div><div class="notice">Cartão demonstrativo, sem QR Code válido ou autorização para resgatar descontos reais.</div>`:`<div class="detail-card"><h2>Seu cartão está a um passo.</h2><p>Crie um cartão fictício para experimentar a Venzuno.</p><button class="btn primary full" onclick="go('register')">Criar cartão gratuito</button></div>`;
+
+async function renderCard() {
+  const area = document.getElementById("cardBody");
+
+  area.innerHTML = `
+    <div class="detail-card">
+      <p>Carregando seu cartão Venzuno...</p>
+    </div>
+  `;
+
+  try {
+    const usuario = await usuarioAtual();
+
+    if (!usuario) {
+      area.innerHTML = `
+        <div class="detail-card">
+          <h2>Seu cartão Venzuno</h2>
+          <p>Entre na sua conta para visualizar seu cartão digital.</p>
+          <button class="btn primary full"
+            onclick="go('register');renderLogin()">
+            Entrar na minha conta
+          </button>
+        </div>
+      `;
+      return;
+    }
+
+    const { data: perfil, error } = await venzunoAuth
+      .from("profiles")
+      .select("full_name")
+      .eq("id", usuario.id)
+      .single();
+
+    if (error) throw error;
+
+    const nome = perfil?.full_name ||
+      usuario.user_metadata?.full_name ||
+      "Cliente Venzuno";
+
+    const identificacao = "VNZ-" +
+      usuario.id.replace(/-/g, "").slice(0, 12).toUpperCase();
+
+    area.innerHTML = `
+      <div class="digital">
+        <div class="brand">
+          <span class="mark">V</span>
+          venzuno<span class="dot">.</span>
+        </div>
+
+        <div class="member">${safe(nome)}</div>
+
+        <small>MEMBRO VENZUNO</small>
+
+        <div class="number">
+          ${identificacao}
+        </div>
+      </div>
+
+      <div class="detail-card" style="margin-top:20px">
+        <h2>Seu cartão digital</h2>
+        <p>Este cartão está vinculado à sua conta Venzuno.</p>
+
+        <button class="btn primary full"
+          onclick="go('companies')">
+          Explorar vantagens
+        </button>
+
+        <br><br>
+
+        <button class="btn outline full"
+          onclick="logoutVenzuno()">
+          Sair da conta
+        </button>
+      </div>
+
+      <p class="notice">
+        Cartão de identificação em fase de testes.
+        A validação de descontos ainda não está habilitada.
+      </p>
+    `;
+
+  } catch (erro) {
+    console.error("Erro ao carregar cartão:", erro);
+
+    area.innerHTML = `
+      <div class="detail-card">
+        <h2>Não foi possível carregar seu cartão</h2>
+        <p>Tente novamente em alguns instantes.</p>
+        <button class="btn outline full"
+          onclick="renderCard()">
+          Tentar novamente
+        </button>
+      </div>
+    `;
+  }
 }
+
+async function logoutVenzuno() {
+  try {
+    await sairUsuario();
+    go("register");
+  } catch (erro) {
+    alert("Não foi possível sair da conta. Tente novamente.");
+  }
+}
+
 render("homeList");
 render("companyList");
 </script>
