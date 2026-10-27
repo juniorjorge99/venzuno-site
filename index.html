@@ -182,11 +182,31 @@ label{font-size:12px;font-weight:700}
 <div class="content" id="cardBody"></div>
 </section>
 
+<section class="screen" id="business">
+  <div class="pagehead">
+    <div class="brand">
+      <span class="mark">V</span>
+      venzuno<span class="dot">.</span>
+    </div>
+    <h1>Painel do Empresário</h1>
+    <p>Gerencie sua empresa e valide benefícios.</p>
+  </div>
+
+  <div class="content" id="businessBody">
+    <div class="detail-card">
+      <p>Carregando informações da empresa...</p>
+    </div>
+  </div>
+</section>
+
 <nav class="bottomnav">
 <button data-page="home" onclick="go('home')"><b>⌂</b>Início</button>
 <button data-page="companies" onclick="go('companies')"><b>▦</b>Empresas</button>
 <button data-page="register" onclick="go('register')"><b>♙</b>Cadastro</button>
 <button data-page="card" onclick="go('card')"><b>▣</b>Cartão</button>
+  
+<button data-page="business" onclick="abrirPainelEmpresarial()"><b>▦</b>Painel</button>
+
 </nav>
 </div>
 
@@ -465,6 +485,73 @@ async function logoutVenzuno() {
     go("register");
   } catch (erro) {
     alert("Não foi possível sair da conta. Tente novamente.");
+  }
+}
+
+async function abrirPainelEmpresarial() {
+  go("business");
+
+  const area = document.getElementById("businessBody");
+
+  area.innerHTML = `
+    <div class="detail-card">
+      <p>Verificando seu acesso empresarial...</p>
+    </div>
+  `;
+
+  try {
+    const usuario = await usuarioAtual();
+
+    if (!usuario) {
+      area.innerHTML = `
+        <div class="detail-card">
+          <h2>Acesso empresarial</h2>
+          <p>Entre na sua conta Venzuno para continuar.</p>
+          <button class="btn primary full"
+            onclick="go('register');renderLogin()">
+            Fazer login
+          </button>
+        </div>
+      `;
+      return;
+    }
+
+    const { data, error } = await venzunoAuth
+      .from("company_staff")
+      .select("company_id, role, active")
+      .eq("user_id", usuario.id)
+      .eq("active", true);
+
+    if (error) throw error;
+
+    if (!data || data.length === 0) {
+      area.innerHTML = `
+        <div class="detail-card">
+          <h2>Acesso restrito</h2>
+          <p>Sua conta não possui uma empresa autorizada.</p>
+        </div>
+      `;
+      return;
+    }
+
+    area.innerHTML = `
+      <div class="detail-card">
+        <h2>Painel empresarial</h2>
+        <p>Seu acesso foi identificado.</p>
+        <p>Empresas autorizadas: ${data.length}</p>
+        <p>O módulo de validação será habilitado após os testes de segurança.</p>
+      </div>
+    `;
+
+  } catch (erro) {
+    console.error("Erro no painel empresarial:", erro);
+
+    area.innerHTML = `
+      <div class="detail-card">
+        <h2>Não foi possível verificar seu acesso</h2>
+        <p>Verifique as permissões do Supabase.</p>
+      </div>
+    `;
   }
 }
 
