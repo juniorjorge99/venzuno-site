@@ -3,273 +3,252 @@
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="theme-color" content="#0e1b3d">
-<title>Venzuno | Conecte-se às vantagens</title>
+<title>Venzuno — Conecte-se às vantagens</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap');
-:root{--navy:#0e1b3d;--blue:#2f80ff;--purple:#9b5cff;--cyan:#2dd4bf;--bg:#f5f7fb;--muted:#7d879a}
+:root{--navy:#0e1b3d;--blue:#2f80ff;--purple:#9b5cff;--cyan:#2dd4bf;--muted:#78849a;--bg:#f5f7fc}
 *{box-sizing:border-box}
-body{margin:0;font-family:Poppins,Arial,sans-serif;background:var(--bg);color:#13213c}
+body{margin:0;background:#eaf0f8;color:#14213c;font-family:Poppins,Arial,sans-serif}
 button,input{font:inherit}
 button{cursor:pointer}
-.gradient{background:linear-gradient(125deg,#9b5cff,#2f80ff 65%,#19d2f3)}
-header{background:var(--navy);color:white;padding:18px 20px;display:flex;align-items:center;justify-content:space-between;gap:12px}
-.brand{font-size:27px;font-weight:800;letter-spacing:-1.5px}
-.brand span{color:#20c9ff}
-.logo{font-size:26px;font-weight:800;color:white;border-radius:13px;padding:2px 13px}
-header small{display:block;color:#aabbd8;font-size:10px}
-header button{border:1px solid #405175;color:white;background:transparent;padding:9px 13px;border-radius:12px}
-.hero{background:linear-gradient(145deg,#0e1b3d,#142b67 65%,#542fbb);color:white;padding:65px 22px 75px;position:relative;overflow:hidden}
-.hero:after{content:"";position:absolute;width:230px;height:230px;border-radius:55px;transform:rotate(35deg);right:-100px;bottom:-120px;background:linear-gradient(140deg,#9b5cff,#15c7ff);opacity:.55}
-.wrap{max-width:1080px;margin:auto}
-.hero .eyebrow{color:#58d8ff;font-size:12px;font-weight:700;letter-spacing:2px}
-.hero h1{font-size:clamp(30px,5vw,55px);line-height:1.16;max-width:700px;margin:17px 0}
-.hero h1 em{font-style:normal;color:#64d5ff}
-.hero p{color:#cbd7f3;max-width:540px;font-size:14px}
-.primary{border:0;color:white;padding:14px 22px;border-radius:14px;font-weight:700;background:linear-gradient(120deg,#8556fa,#258aff);box-shadow:0 8px 22px #2247b43b}
-.secondary{background:white;border:1px solid #dfe5f1;color:#162c52;padding:12px 18px;border-radius:13px;font-weight:600}
-.hero .primary{margin-top:15px}
-main{max-width:1080px;margin:auto;padding:26px 18px 110px}
-h2{font-size:23px;letter-spacing:-.5px;margin:8px 0 5px}
-.subtitle{font-size:13px;color:var(--muted);margin:0 0 22px}
-.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:-45px;position:relative;z-index:1}
-.stat{background:white;border-radius:17px;padding:20px 12px;text-align:center;box-shadow:0 10px 28px #17244b12}
-.stat strong{display:block;color:#287bff;font-size:23px}
-.stat small{color:#7d879a;font-size:11px}
-.section{margin-top:34px}
-.categories{display:flex;gap:10px;overflow:auto;padding:6px 0 16px}
-.cat{background:white;border:1px solid #e2e7f1;border-radius:14px;padding:12px 17px;white-space:nowrap;font-size:12px;font-weight:600;color:#34415c}
-.cat.active{background:#172a57;color:white;border-color:#172a57}
-.search{width:100%;padding:15px;border:1px solid #e0e5ef;border-radius:14px;background:white;outline:none;margin-bottom:14px}
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:17px}
-.company{background:white;border-radius:20px;overflow:hidden;box-shadow:0 6px 24px #1a29500c;border:1px solid #edf0f7}
-.company-cover{height:125px;display:flex;align-items:center;justify-content:center;color:white;font-weight:800;font-size:32px;letter-spacing:-1px}
-.elite{background:linear-gradient(130deg,#121212,#454545)}
-.moura{background:linear-gradient(130deg,#111827,#d92739)}
-.nopre{background:linear-gradient(130deg,#dce5ee,#7e94ac);color:#0e1b3d}
-.company-body{padding:17px}
-.tag{font-size:10px;color:#6881a4;text-transform:uppercase;letter-spacing:1px;font-weight:700}
-.company h3{margin:7px 0;font-size:18px}
-.discount{font-size:23px;font-weight:800;color:#1676ef}
-.company p{font-size:12px;color:#7d879a;min-height:38px}
-.company button{width:100%;margin-top:8px}
-.card{background:white;border-radius:20px;padding:22px;box-shadow:0 6px 24px #1a29500c}
-.steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:15px}
-.step{padding:22px;border-radius:18px;background:white}
-.step .emoji{font-size:28px}
-.step h3{margin:10px 0 5px;font-size:15px}
-.step p{color:var(--muted);font-size:12px}
-.field{width:100%;padding:14px;border:1px solid #dfe5ef;border-radius:12px;margin:7px 0 14px;outline:none}
-label{font-size:12px;font-weight:600}
-.member-card{background:linear-gradient(135deg,#0e1b3d,#183d85 60%,#683bd1);border-radius:22px;color:white;padding:26px;max-width:440px;min-height:235px;box-shadow:0 15px 35px #1b397b32}
-.member-card .brand{font-size:31px}
-.member-card small{color:#a8caff}
-.member-name{font-size:21px;font-weight:700;margin-top:48px}
-.member-number{font-size:11px;color:#b5c9ec;margin-top:5px}
-.info{background:#eaf3ff;color:#315d9b;border-radius:12px;padding:14px;font-size:12px;margin-top:15px}
-nav{position:fixed;bottom:0;left:0;right:0;background:white;border-top:1px solid #e7eaf0;display:flex;justify-content:space-around;padding:11px 5px max(12px,env(safe-area-inset-bottom));z-index:10}
-nav button{border:0;background:none;color:#8a96aa;font-size:11px;font-weight:600;display:flex;flex-direction:column;align-items:center;gap:3px;min-width:65px}
-nav button b{font-size:20px}
-nav button.active{color:#287bff}
-.page{display:none}
-.page.active{display:block}
-footer{text-align:center;color:#8a96aa;font-size:11px;padding:20px 20px 95px}
-.modal{position:fixed;inset:0;background:#071329b8;z-index:20;display:none;align-items:center;justify-content:center;padding:20px}
-.modal.open{display:flex}
-.modal-content{background:white;border-radius:22px;padding:25px;width:100%;max-width:460px}
-.close{float:right;border:0;background:#eef2fa;border-radius:10px;padding:8px 12px}
-@media(min-width:750px){main{padding-bottom:60px}nav{position:sticky;top:0;justify-content:center;gap:65px;box-shadow:0 3px 10px #152e5510}footer{padding-bottom:25px}.hero{padding:85px 30px 100px}}
+button:active{transform:scale(.98)}
+.app{max-width:520px;margin:auto;background:var(--bg);min-height:100vh;padding-bottom:92px;box-shadow:0 0 45px #1220441c}
+.screen{display:none}
+.screen.active{display:block}
+.brand{display:flex;align-items:center;gap:9px;font-size:26px;font-weight:800;letter-spacing:-1.4px}
+.brand .dot{color:#16caff}
+.mark{display:grid;place-items:center;width:39px;height:39px;border-radius:12px;background:linear-gradient(135deg,#9b5cff,#287cff 65%,#17d2f3);color:white;font-size:26px;font-weight:800;transform:skew(-6deg)}
+.hero{background:radial-gradient(circle at 95% 80%,#5939d3 0,transparent 38%),linear-gradient(145deg,#091631,#122a5e);color:white;padding:35px 25px 52px;position:relative;overflow:hidden}
+.hero:after{content:"";position:absolute;right:-90px;bottom:-105px;width:260px;height:260px;border-radius:65px;transform:rotate(35deg);background:linear-gradient(140deg,#a04aff,#148fff,#1be1e5);opacity:.5}
+.hero>*{position:relative;z-index:1}
+.hero .tagline{font-size:11px;color:#c3d4f6;margin-top:5px}
+.hero .eyebrow{margin-top:48px;font-size:11px;color:#50d9ff;letter-spacing:2px;font-weight:700}
+.hero h1{font-size:35px;line-height:1.2;letter-spacing:-1.4px;margin:15px 0}
+.hero h1 span{color:#6ad7ff}
+.hero p{font-size:13px;line-height:1.8;color:#d1ddf4;max-width:350px}
+.btn{border:0;border-radius:14px;padding:14px 18px;font-size:13px;font-weight:700}
+.btn.primary{color:white;background:linear-gradient(110deg,#8655fa,#258bff);box-shadow:0 9px 20px #305dcb36}
+.btn.white{background:white;color:#18366d}
+.btn.outline{background:white;color:#234f91;border:1px solid #dce4f2}
+.btn.full{width:100%}
+.hero .btn{margin-top:16px}
+.content{padding:23px 20px}
+.section-title{font-size:19px;font-weight:800;margin:8px 0 4px;letter-spacing:-.5px}
+.sub{font-size:12px;color:var(--muted);line-height:1.7;margin:0 0 18px}
+.topbar{background:white;padding:21px 20px 16px;border-bottom:1px solid #edf0f6}
+.topbar small{color:#8290a5;font-size:11px}
+.topline{display:flex;justify-content:space-between;align-items:center}
+.avatar{width:43px;height:43px;border-radius:50%;background:#eaf1ff;display:grid;place-items:center;color:#2f80ff;font-size:22px}
+.search{width:100%;background:#f5f7fc;border:1px solid #e6eaf3;padding:15px;border-radius:15px;margin-top:19px;outline:none;font-size:12px}
+.search:focus{border-color:#2f80ff}
+.categories{display:flex;gap:10px;overflow-x:auto;padding:16px 0 4px;scrollbar-width:none}
+.category{border:1px solid #e6eaf3;background:white;padding:11px 14px;border-radius:14px;white-space:nowrap;color:#596782;font-size:11px;font-weight:700}
+.category.selected{background:#172e62;color:white;border-color:#172e62}
+.promo{background:linear-gradient(115deg,#152b63,#3a43b9 60%,#8254ef);border-radius:22px;color:white;padding:23px;overflow:hidden;position:relative}
+.promo:after{content:"✦";font-size:100px;position:absolute;right:7px;top:-23px;color:#ffffff19}
+.promo small{font-size:10px;letter-spacing:1px;color:#aeeeff}
+.promo h2{font-size:21px;max-width:260px;margin:10px 0 5px}
+.promo p{font-size:11px;color:#e2e9ff;margin:0}
+.heading{display:flex;align-items:center;justify-content:space-between;margin:26px 0 14px;gap:8px}
+.heading h2{font-size:18px;margin:0}
+.textlink{border:0;background:transparent;color:#287bff;font-size:11px;font-weight:700}
+.companies{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.company{border:1px solid #edf0f7;border-radius:18px;background:white;text-align:left;padding:0;overflow:hidden;box-shadow:0 5px 18px #192b4e0b}
+.cover{height:125px;display:flex;align-items:center;justify-content:center;padding:12px;position:relative;overflow:hidden}
+.cover.elite{background:linear-gradient(145deg,#10131a,#404550)}
+.cover.moura{background:linear-gradient(145deg,#1b1b22,#bc1e30)}
+.cover.nopre{background:linear-gradient(145deg,#f6f8fa,#dbe2ea)}
+.cover img{width:100%;height:100%;object-fit:contain}
+.fallback{font-size:21px;font-weight:800;color:white;text-align:center}
+.nopre .fallback{color:#14213c}
+.company-body{padding:13px}
+.company-body small{color:#8a96a9;font-size:10px}
+.company-body h3{font-size:13px;margin:5px 0;min-height:38px}
+.offer{font-size:19px;font-weight:800;color:#217cf4}
+.company-body .more{font-size:10px;color:#5073aa;margin-top:8px}
+.pagehead{background:linear-gradient(130deg,#0e1b3d,#203f83);color:white;padding:26px 22px 30px}
+.pagehead h1{font-size:24px;margin:26px 0 5px}
+.pagehead p{font-size:12px;color:#cbd7ee}
+.pagehead .search{background:white}
+.detail-card{background:white;border-radius:21px;padding:20px;margin-bottom:15px}
+.detail-cover{height:190px;border-radius:17px;margin-bottom:18px}
+.detail-card h2{font-size:23px;margin:7px 0}
+.detail-card p{font-size:13px;color:#66748c;line-height:1.8}
+.pill{display:inline-block;border-radius:50px;background:#e8f8f2;color:#17865c;padding:8px 13px;font-weight:800;font-size:12px}
+.notice{font-size:11px;color:#8190a7;line-height:1.7;margin-top:16px}
+label{font-size:12px;font-weight:700}
+.field{display:block;width:100%;padding:15px;border:1px solid #dfe5ef;border-radius:13px;margin:8px 0 18px;outline:none}
+.digital{background:radial-gradient(circle at 105% 95%,#7450e9,transparent 48%),linear-gradient(130deg,#0c1939,#16417f);color:white;border-radius:23px;padding:26px 23px;min-height:245px;box-shadow:0 17px 35px #18386f32}
+.digital .member{font-size:19px;font-weight:700;margin-top:56px;overflow-wrap:anywhere}
+.digital small{color:#c4d8ff;font-size:10px}
+.digital .number{font-size:11px;color:#a5c5ff;margin-top:7px}
+.steps{display:grid;gap:12px}
+.step{background:white;padding:18px;border-radius:17px;display:flex;align-items:center;gap:15px}
+.step .emoji{font-size:27px}
+.step strong{font-size:13px}
+.step p{font-size:11px;color:#8190a7;margin:3px 0}
+.bottomnav{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:520px;background:white;border-top:1px solid #e7ebf3;display:flex;justify-content:space-around;padding:11px 6px max(12px,env(safe-area-inset-bottom));z-index:10}
+.bottomnav button{border:0;background:none;color:#8b97aa;font-size:10px;font-weight:600;display:flex;flex-direction:column;align-items:center;gap:3px}
+.bottomnav button b{font-size:22px}
+.bottomnav button.active{color:#287bff}
+@media(min-width:650px){.app{margin:25px auto;border-radius:25px;overflow:hidden;min-height:calc(100vh - 50px)}}
 </style>
 </head>
 <body>
+<div class="app">
 
-<header>
-<div>
-<div class="brand">venzuno<span>.</span></div>
-<small>Conecte-se às vantagens.</small>
-</div>
-<button onclick="go('cartao')">Meu cartão ↗</button>
-</header>
-
-<nav>
-<button data-nav="inicio" class="active" onclick="go('inicio')"><b>⌂</b>Início</button>
-<button data-nav="empresas" onclick="go('empresas')"><b>▦</b>Empresas</button>
-<button data-nav="cartao" onclick="go('cartao')"><b>▤</b>Cartão</button>
-<button data-nav="sobre" onclick="go('sobre')"><b>ⓘ</b>Sobre</button>
-</nav>
-
-<section id="inicio" class="page active">
+<section class="screen active" id="welcome">
 <div class="hero">
-<div class="wrap">
+<div class="brand"><span class="mark">V</span>venzuno<span class="dot">.</span></div>
+<div class="tagline">Conecte-se às vantagens.</div>
 <div class="eyebrow">✦ BEM-VINDO À VENZUNO</div>
-<h1>Sua cidade.<br>Suas vantagens.<br><em>Mais economia.</em></h1>
-<p>Conectamos você às melhores empresas da sua cidade. Descubra benefícios exclusivos, tudo em um só lugar.</p>
-<button class="primary" onclick="go('empresas')">Explorar vantagens →</button>
+<h1>Mais vantagens.<br>Mais economia.<br><span>Mais conexões.</span></h1>
+<p>As melhores empresas da sua cidade, reunidas em uma experiência simples, moderna e gratuita.</p>
+<button class="btn white" onclick="go('home')">Explorar vantagens →</button>
 </div>
-</div>
-<main>
-<div class="stats">
-<div class="stat"><strong>3</strong><small>Empresas</small></div>
-<div class="stat"><strong>100%</strong><small>Gratuito</small></div>
-<div class="stat"><strong>MG</strong><small>Navarro</small></div>
-</div>
-<div class="section">
-<h2>Destaques da semana</h2>
-<p class="subtitle">Benefícios especiais para você aproveitar.</p>
-<div id="homeCompanies" class="grid"></div>
-</div>
-<div class="section">
-<h2>Como funciona?</h2>
-<p class="subtitle">Três passos para começar a economizar.</p>
+<div class="content">
+<h2 class="section-title">Sua cidade tem vantagens.</h2>
+<p class="sub">Começamos por Engenheiro Navarro — MG, aproximando consumidores e empresas locais.</p>
 <div class="steps">
-<div class="step"><div class="emoji">👤</div><h3>1. Cadastre-se</h3><p>Crie seu cadastro gratuito na Venzuno.</p></div>
-<div class="step"><div class="emoji">💳</div><h3>2. Receba seu cartão</h3><p>Tenha acesso ao cartão digital de associado.</p></div>
-<div class="step"><div class="emoji">🎁</div><h3>3. Aproveite</h3><p>Descubra os benefícios das empresas parceiras.</p></div>
+<div class="step"><div class="emoji">🏪</div><div><strong>Empresas parceiras</strong><p>Descubra estabelecimentos da cidade.</p></div></div>
+<div class="step"><div class="emoji">🎁</div><div><strong>Benefícios exclusivos</strong><p>Conheça descontos e condições especiais.</p></div></div>
+<div class="step"><div class="emoji">💳</div><div><strong>Cartão digital gratuito</strong><p>Tenha sua identificação Venzuno.</p></div></div>
 </div>
-</div>
-</main>
-</section>
-
-<section id="empresas" class="page">
-<main>
-<h2>Explore as vantagens ✨</h2>
-<p class="subtitle">Empresas parceiras em Engenheiro Navarro – MG.</p>
-<input id="search" class="search" placeholder="🔎 Buscar empresas..." oninput="renderCompanies()">
-<div class="categories">
-<button class="cat active" onclick="filterCategory('Todas',this)">Todas</button>
-<button class="cat" onclick="filterCategory('Beleza',this)">✂️ Beleza</button>
-<button class="cat" onclick="filterCategory('Automotivo',this)">🚘 Automotivo</button>
-<button class="cat" onclick="filterCategory('Móveis',this)">🛋️ Móveis</button>
-</div>
-<div id="companies" class="grid"></div>
-</main>
-</section>
-
-<section id="cartao" class="page">
-<main>
-<h2>Meu cartão digital 💳</h2>
-<p class="subtitle">Seu acesso gratuito às vantagens da Venzuno.</p>
-<div id="register" class="card" style="max-width:500px">
-<h3>Crie seu cartão</h3>
-<p class="subtitle">Cadastro fictício para experimentar o protótipo.</p>
-<label>Seu nome</label>
-<input id="memberName" class="field" placeholder="Digite seu nome" maxlength="60">
-<button class="primary" onclick="register()">Criar cartão gratuito →</button>
-</div>
-<div id="cardArea" style="display:none">
-<div class="member-card">
-<div class="brand">venzuno<span>.</span></div>
-<small>CARTÃO DIGITAL • DEMONSTRAÇÃO</small>
-<div id="displayName" class="member-name"></div>
-<div id="displayNumber" class="member-number"></div>
-</div>
-<div class="info">Este cartão é apenas demonstrativo. Ainda não permite validar descontos nos estabelecimentos.</div>
 <br>
-<button class="secondary" onclick="go('empresas')">Explorar vantagens →</button>
-<button class="secondary" onclick="resetCard()">Trocar nome</button>
+<button class="btn primary full" onclick="go('register')">Criar cartão demonstrativo</button>
 </div>
-</main>
 </section>
 
-<section id="sobre" class="page">
-<main>
-<h2>Conheça a Venzuno</h2>
-<p class="subtitle">Conecte-se às vantagens.</p>
-<div class="card">
-<h3>Mais benefícios para sua cidade.</h3>
-<p>A Venzuno é uma plataforma que conecta consumidores às empresas parceiras, reunindo vantagens e oportunidades de economia em um só lugar.</p>
-<p>Nosso objetivo é valorizar o comércio local, facilitar a descoberta de estabelecimentos e aproximar empresas e clientes.</p>
-<p><strong>Para consumidores, o acesso será gratuito.</strong></p>
-<div class="info">Estamos apresentando um protótipo demonstrativo. As ofertas deverão ser confirmadas com os estabelecimentos antes do lançamento oficial.</div>
+<section class="screen" id="home">
+<div class="topbar">
+<div class="topline">
+<div><div class="brand"><span class="mark">V</span>venzuno<span class="dot">.</span></div><small>📍 Engenheiro Navarro — MG</small></div>
+<div class="avatar">✦</div>
 </div>
-</main>
+<input class="search" id="homeSearch" placeholder="🔎 Buscar empresas e vantagens..." oninput="render('homeList',this.value)">
+<div class="categories">
+<button class="category selected" onclick="filter('Todas',this)">✨ Todas</button>
+<button class="category" onclick="filter('Beleza',this)">✂️ Beleza</button>
+<button class="category" onclick="filter('Automotivo',this)">🚘 Automotivo</button>
+<button class="category" onclick="filter('Móveis',this)">🛋️ Móveis</button>
+</div>
+</div>
+<div class="content">
+<div class="promo">
+<small>BENEFÍCIOS DA SEMANA</small>
+<h2>Economize com a Venzuno.</h2>
+<p>Vantagens nas empresas que você já conhece.</p>
+</div>
+<div class="heading"><h2>Empresas parceiras</h2><button class="textlink" onclick="go('companies')">Ver todas →</button></div>
+<div class="companies" id="homeList"></div>
+</div>
 </section>
 
-<div id="modal" class="modal" onclick="closeModal(event)">
-<div class="modal-content">
-<button class="close" onclick="closeModal()">✕</button>
-<div id="modalBody"></div>
+<section class="screen" id="companies">
+<div class="pagehead">
+<div class="brand"><span class="mark">V</span>venzuno<span class="dot">.</span></div>
+<h1>Explorar empresas</h1>
+<p>Encontre a vantagem ideal para você.</p>
+<input class="search" id="companySearch" placeholder="🔎 Buscar empresa..." oninput="render('companyList',this.value)">
 </div>
-</div>
+<div class="content"><div class="companies" id="companyList"></div></div>
+</section>
 
-<footer>© 2026 Venzuno • Protótipo demonstrativo</footer>
+<section class="screen" id="detail">
+<div class="pagehead">
+<button class="textlink" style="color:white" onclick="go('companies')">← Voltar às empresas</button>
+</div>
+<div class="content" id="detailBody"></div>
+</section>
+
+<section class="screen" id="register">
+<div class="pagehead">
+<div class="brand"><span class="mark">V</span>venzuno<span class="dot">.</span></div>
+<h1>Cadastro gratuito</h1>
+<p>Seu primeiro passo para aproveitar as vantagens.</p>
+</div>
+<div class="content" id="registerBody"></div>
+</section>
+
+<section class="screen" id="card">
+<div class="pagehead">
+<div class="brand"><span class="mark">V</span>venzuno<span class="dot">.</span></div>
+<h1>Meu cartão digital</h1>
+<p>Sua identificação de demonstração.</p>
+</div>
+<div class="content" id="cardBody"></div>
+</section>
+
+<nav class="bottomnav">
+<button data-page="home" onclick="go('home')"><b>⌂</b>Início</button>
+<button data-page="companies" onclick="go('companies')"><b>▦</b>Empresas</button>
+<button data-page="register" onclick="go('register')"><b>♙</b>Cadastro</button>
+<button data-page="card" onclick="go('card')"><b>▣</b>Cartão</button>
+</nav>
+</div>
 
 <script>
 const companies=[
-{id:1,name:"Elite Barber",category:"Beleza",discount:"5% OFF",description:"5% de desconto nos serviços da barbearia.",style:"elite",symbol:"✂ ELITE",conditions:"Desconto demonstrativo para clientes Venzuno."},
-{id:2,name:"Moura Esteticar",category:"Automotivo",discount:"10% OFF",description:"10% de desconto de segunda a quarta-feira.",style:"moura",symbol:"MOURA",conditions:"Válido de segunda a quarta-feira."},
-{id:3,name:"Nopre Móveis",category:"Móveis",discount:"10% OFF",description:"10% de desconto em seu móvel planejado.",style:"nopre",symbol:"NOPRE",conditions:"Desconto em móveis planejados."}
+{id:"elite",name:"Elite Barber",category:"Beleza",offer:"5% OFF",description:"5% de desconto nos serviços da barbearia.",conditions:"Oferta demonstrativa, sujeita à confirmação do estabelecimento.",image:"imagens/elite.jpg",style:"elite",fallback:"ELITE BARBER"},
+{id:"moura",name:"Moura Esteticar",category:"Automotivo",offer:"10% OFF",description:"10% de desconto nos serviços de estética automotiva de segunda a quarta-feira.",conditions:"Válido de segunda a quarta-feira. Oferta demonstrativa.",image:"imagens/moura.jpg",style:"moura",fallback:"MOURA ESTETICAR"},
+{id:"nopre",name:"Nopre Móveis",category:"Móveis",offer:"10% OFF",description:"10% de desconto em seu móvel planejado.",conditions:"Válido para móveis planejados. Oferta demonstrativa.",image:"imagens/nopre.jpg",style:"nopre",fallback:"NOPRE MÓVEIS"}
 ];
-let currentCategory="Todas";
+let category="Todas";
+let member=localStorage.getItem("venzuno_demo_member")||"";
+
 function go(page){
-document.querySelectorAll(".page").forEach(el=>el.classList.remove("active"));
-document.getElementById(page).classList.add("active");
-document.querySelectorAll("nav button").forEach(el=>el.classList.toggle("active",el.dataset.nav===page));
+document.querySelectorAll(".screen").forEach(e=>e.classList.toggle("active",e.id===page));
+document.querySelectorAll(".bottomnav button").forEach(e=>e.classList.toggle("active",e.dataset.page===page));
+if(page==="home")render("homeList",document.getElementById("homeSearch").value);
+if(page==="companies")render("companyList",document.getElementById("companySearch").value);
+if(page==="register")renderRegister();
+if(page==="card")renderCard();
 window.scrollTo(0,0);
 }
-function companyHTML(c){
-return `<article class="company">
-<div class="company-cover ${c.style}">${c.symbol}</div>
-<div class="company-body">
-<span class="tag">${c.category}</span>
-<h3>${c.name}</h3>
-<div class="discount">${c.discount}</div>
-<p>${c.description}</p>
-<button class="secondary" onclick="openCompany(${c.id})">Ver vantagem →</button>
-</div></article>`;
+function cover(c,extra=""){
+return `<div class="cover ${c.style} ${extra}"><span class="fallback">${c.fallback}</span><img src="${c.image}" alt="Logo ${c.name}" onload="this.previousElementSibling.style.display='none'" onerror="this.style.display='none'"></div>`;
 }
-function renderCompanies(){
-const search=document.getElementById("search").value.toLowerCase();
-const filtered=companies.filter(c=>(currentCategory==="Todas"||c.category===currentCategory)&&c.name.toLowerCase().includes(search));
-document.getElementById("companies").innerHTML=filtered.length?filtered.map(companyHTML).join(""):"<p>Nenhuma empresa encontrada.</p>";
+function render(target,search=""){
+let results=companies.filter(c=>(target==="companyList"||category==="Todas"||c.category===category)&&c.name.toLowerCase().includes(search.toLowerCase()));
+document.getElementById(target).innerHTML=results.length?results.map(c=>`<button class="company" onclick="detail('${c.id}')">${cover(c)}<div class="company-body"><small>${c.category}</small><h3>${c.name}</h3><div class="offer">${c.offer}</div><div class="more">Ver vantagem →</div></div></button>`).join(""):"<p class='sub'>Nenhuma empresa encontrada.</p>";
 }
-function filterCategory(category,button){
-currentCategory=category;
-document.querySelectorAll(".cat").forEach(el=>el.classList.remove("active"));
-button.classList.add("active");
-renderCompanies();
+function filter(value,button){
+category=value;
+document.querySelectorAll(".category").forEach(e=>e.classList.remove("selected"));
+button.classList.add("selected");
+render("homeList",document.getElementById("homeSearch").value);
 }
-function openCompany(id){
+function detail(id){
 const c=companies.find(x=>x.id===id);
-document.getElementById("modalBody").innerHTML=`
-<div class="company-cover ${c.style}" style="border-radius:15px;margin:20px 0">${c.symbol}</div>
-<span class="tag">${c.category}</span>
-<h2>${c.name}</h2>
-<div class="discount">${c.discount}</div>
-<p>${c.description}</p>
-<p><strong>Condições:</strong> ${c.conditions}</p>
-<div class="info">Oferta ilustrativa. Confirme a disponibilidade com a empresa.</div>
-<br><button class="primary" onclick="closeModal();go('cartao')">Ver meu cartão →</button>`;
-document.getElementById("modal").classList.add("open");
+document.getElementById("detailBody").innerHTML=`<div class="detail-card">${cover(c,"detail-cover")}<small style="color:#8290a5">${c.category} • Engenheiro Navarro</small><h2>${c.name}</h2><span class="pill">${c.offer}</span><p>${c.description}</p><p><strong>Condições:</strong> ${c.conditions}</p><button class="btn primary full" onclick="go('card')">Ver meu cartão digital →</button><div class="notice">A utilização real dos descontos ainda não está habilitada.</div></div>`;
+go("detail");
 }
-function closeModal(event){
-if(event&&event.target.id!=="modal")return;
-document.getElementById("modal").classList.remove("open");
+function safe(s){
+return s.replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
 }
-function register(){
+function renderRegister(){
+document.getElementById("registerBody").innerHTML=member?`<div class="detail-card"><h2>Seu cartão já está pronto!</h2><p>Nome cadastrado neste navegador: <strong>${safe(member)}</strong></p><button class="btn primary full" onclick="go('card')">Visualizar cartão</button><br><br><button class="btn outline full" onclick="resetCard()">Trocar nome</button></div>`:`<div class="detail-card"><h2>Crie seu cartão</h2><p>Use um nome fictício para testar o protótipo.</p><label for="memberName">Seu nome</label><input class="field" id="memberName" maxlength="60" placeholder="Ex.: Cliente Venzuno"><button class="btn primary full" onclick="createCard()">Criar cartão gratuito →</button><div class="notice">Os dados são armazenados somente neste navegador. Não há cadastro real.</div></div>`;
+}
+function createCard(){
 const name=document.getElementById("memberName").value.trim();
-if(!name){alert("Digite um nome para continuar.");return;}
-localStorage.setItem("venzuno_demo_name",name);
-showCard();
-}
-function showCard(){
-const name=localStorage.getItem("venzuno_demo_name");
-document.getElementById("register").style.display=name?"none":"block";
-document.getElementById("cardArea").style.display=name?"block":"none";
-if(name){
-document.getElementById("displayName").textContent=name;
-document.getElementById("displayNumber").textContent="MEMBRO DEMO • VNZ-0001";
-}
+if(name.length<2){alert("Digite um nome com pelo menos 2 caracteres.");return;}
+member=name;
+localStorage.setItem("venzuno_demo_member",name);
+go("card");
 }
 function resetCard(){
-localStorage.removeItem("venzuno_demo_name");
-document.getElementById("memberName").value="";
-showCard();
+member="";
+localStorage.removeItem("venzuno_demo_member");
+renderRegister();
 }
-document.getElementById("homeCompanies").innerHTML=companies.map(companyHTML).join("");
-renderCompanies();
-showCard();
+function renderCard(){
+document.getElementById("cardBody").innerHTML=member?`<div class="digital"><div class="brand"><span class="mark">V</span>venzuno<span class="dot">.</span></div><div class="member">${safe(member)}</div><small>ASSOCIADO • DEMONSTRAÇÃO</small><div class="number">VNZ-DEMO-0001</div></div><div class="detail-card" style="margin-top:20px"><h2>Suas vantagens</h2><p>Conheça as empresas participantes e seus benefícios.</p><button class="btn primary full" onclick="go('companies')">Explorar empresas →</button></div><div class="notice">Cartão demonstrativo, sem QR Code válido ou autorização para resgatar descontos reais.</div>`:`<div class="detail-card"><h2>Seu cartão está a um passo.</h2><p>Crie um cartão fictício para experimentar a Venzuno.</p><button class="btn primary full" onclick="go('register')">Criar cartão gratuito</button></div>`;
+}
+render("homeList");
+render("companyList");
 </script>
 </body>
 </html>
