@@ -533,14 +533,36 @@ const { data, error } = await venzunoAuth
       return;
     }
 
-    area.innerHTML = `
-      <div class="detail-card">
-        <h2>Painel empresarial</h2>
-        <p>Seu acesso foi identificado.</p>
-        <p>Empresas autorizadas: ${data.length}</p>
-        <p>O módulo de validação será habilitado após os testes de segurança.</p>
+  
+area.innerHTML = `
+  <div class="detail-card">
+    <h2>Minhas empresas</h2>
+    <p>Gerencie seus estabelecimentos parceiros.</p>
+
+    ${data.map(empresa => `
+      <div class="detail-card" style="margin-top:16px">
+        <h2>${safe(empresa.company_name)}</h2>
+
+        <p>
+          Acesso:
+          <strong>
+            ${empresa.staff_role === "owner"
+              ? "Proprietário"
+              : "Validador"}
+          </strong>
+        </p>
+
+        <p>Empresa autorizada na Venzuno.</p>
+
+        <p style="font-size:13px">
+          A validação de benefícios será liberada
+          após os testes de segurança.
+        </p>
       </div>
-    `;
+    `).join("")}
+  </div>
+`;
+
 
   } catch (erro) {
     console.error("Erro no painel empresarial:", erro);
