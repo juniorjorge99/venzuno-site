@@ -488,6 +488,47 @@ async function logoutVenzuno() {
   }
 }
 
+async function cadastrarBeneficioVenzuno(companyId) {
+  const titulo = prompt("Nome do benefício:");
+  if (!titulo || !titulo.trim()) return;
+
+  const descontoTexto = prompt("Desconto em % (0 a 100):");
+  if (descontoTexto === null) return;
+
+  const desconto = Number(descontoTexto.replace(",", "."));
+
+  if (!descontoTexto.trim() || !Number.isFinite(desconto) ||
+      desconto < 0 || desconto > 100) {
+    alert("Informe um desconto válido de 0 a 100%.");
+    return;
+  }
+
+  const condicoes = prompt("Condições do benefício:");
+  if (condicoes === null) return;
+
+  try {
+    const { error } = await venzunoAuth.rpc(
+      "gerenciar_beneficio_venzuno",
+      {
+        p_company_id: companyId,
+        p_title: titulo.trim(),
+        p_discount_percent: desconto,
+        p_conditions: condicoes,
+        p_benefit_id: null,
+        p_active: true
+      }
+    );
+
+    if (error) throw error;
+
+    alert("Benefício cadastrado com sucesso!");
+    await abrirPainelEmpresarial();
+  } catch (erro) {
+    console.error("Erro ao cadastrar benefício:", erro);
+    alert("Não foi possível cadastrar o benefício.");
+  }
+}
+
 async function abrirPainelEmpresarial() {
   go("business");
 
@@ -559,6 +600,14 @@ if (erroBeneficios) throw erroBeneficios;
 
         <p>Empresa autorizada na Venzuno.</p>
         
+${empresa.staff_role === "owner" ? `
+  <button class="btn outline full"
+    onclick="cadastrarBeneficioVenzuno('${empresa.company_id}')"
+    style="margin-top:16px">
+    + Cadastrar benefício
+  </button>
+` : ""}
+
 
 <div style="margin-top:20px">
   <h3>Benefícios cadastrados</h3>
