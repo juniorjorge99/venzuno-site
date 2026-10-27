@@ -529,6 +529,35 @@ async function cadastrarBeneficioVenzuno(companyId) {
   }
 }
 
+async function alternarBeneficioVenzuno(companyId, beneficio) {
+  const novoStatus = !beneficio.active;
+  const acao = novoStatus ? "ativar" : "desativar";
+
+  if (!confirm("Deseja " + acao + " este benefício?")) return;
+
+  try {
+    const { error } = await venzunoAuth.rpc(
+      "gerenciar_beneficio_venzuno",
+      {
+        p_company_id: companyId,
+        p_benefit_id: beneficio.id,
+        p_title: beneficio.title,
+        p_discount_percent: beneficio.discount_percent,
+        p_conditions: beneficio.conditions,
+        p_active: novoStatus
+      }
+    );
+
+    if (error) throw error;
+
+    alert("Benefício atualizado com sucesso!");
+    await abrirPainelEmpresarial();
+  } catch (erro) {
+    console.error("Erro ao alterar benefício:", erro);
+    alert("Não foi possível alterar o benefício.");
+  }
+}
+
 async function abrirPainelEmpresarial() {
   go("business");
 
@@ -620,6 +649,15 @@ ${empresa.staff_role === "owner" ? `
       '<p>Desconto: ' + Number(b.discount_percent ?? 0) + '%</p>' +
       '<p>' + safe(b.conditions || "Sem condições adicionais.") + '</p>' +
       '<p>Status: ' + (b.active ? "Ativo" : "Inativo") + '</p>' +
+      
+(empresa.staff_role === "owner"
+  ? '<button class="btn outline full" style="margin-top:12px" onclick="alternarBeneficioVenzuno(\'' +
+      empresa.company_id + '\', beneficios.find(b => b.id === \'' +
+      b.id + '\'))">' +
+      (b.active ? 'Desativar benefício' : 'Ativar benefício') +
+    '</button>'
+  : '') +
+
       '</div>'
     ).join("") || "<p>Nenhum benefício cadastrado.</p>"}
 </div>
