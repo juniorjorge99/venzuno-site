@@ -229,9 +229,127 @@ go("detail");
 function safe(s){
 return s.replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
 }
-function renderRegister(){
-document.getElementById("registerBody").innerHTML=member?`<div class="detail-card"><h2>Seu cartão já está pronto!</h2><p>Nome cadastrado neste navegador: <strong>${safe(member)}</strong></p><button class="btn primary full" onclick="go('card')">Visualizar cartão</button><br><br><button class="btn outline full" onclick="resetCard()">Trocar nome</button></div>`:`<div class="detail-card"><h2>Crie seu cartão</h2><p>Use um nome fictício para testar o protótipo.</p><label for="memberName">Seu nome</label><input class="field" id="memberName" maxlength="60" placeholder="Ex.: Cliente Venzuno"><button class="btn primary full" onclick="createCard()">Criar cartão gratuito →</button><div class="notice">Os dados são armazenados somente neste navegador. Não há cadastro real.</div></div>`;
+
+function renderRegister() {
+  document.getElementById("registerBody").innerHTML = `
+    <div class="detail-card">
+      <h2>Crie sua conta Venzuno</h2>
+      <p>Cadastre-se gratuitamente para acessar suas vantagens.</p>
+
+      <form id="venzunoSignupForm">
+        <label for="signupName">Nome completo</label>
+        <input class="field" id="signupName"
+          type="text" autocomplete="name"
+          maxlength="100" required>
+
+        <label for="signupEmail">E-mail</label>
+        <input class="field" id="signupEmail"
+          type="email" autocomplete="email" required>
+
+        <label for="signupPassword">Senha</label>
+        <input class="field" id="signupPassword"
+          type="password" autocomplete="new-password"
+          minlength="8" required>
+
+        <button class="btn primary full" type="submit">
+          Criar conta gratuita
+        </button>
+      </form>
+
+      <p id="signupMessage" class="notice" role="status"></p>
+
+      <button class="btn outline full"
+        type="button" onclick="renderLogin()">
+        Já tenho uma conta
+      </button>
+    </div>
+  `;
+
+  document.getElementById("venzunoSignupForm")
+    .addEventListener("submit", async function(event) {
+      event.preventDefault();
+
+      const nome = document.getElementById("signupName").value.trim();
+      const email = document.getElementById("signupEmail").value.trim();
+      const senha = document.getElementById("signupPassword").value;
+      const mensagem = document.getElementById("signupMessage");
+      const botao = this.querySelector("button[type=submit]");
+
+      if (nome.length < 2) {
+        mensagem.textContent = "Informe seu nome completo.";
+        return;
+      }
+
+      botao.disabled = true;
+      mensagem.textContent = "Criando sua conta...";
+
+      try {
+        await cadastrarUsuario(nome, email, senha);
+        mensagem.textContent =
+          "Solicitação recebida! Verifique seu e-mail para confirmar a conta. Se já existir uma conta, use a opção de login.";
+        this.reset();
+      } catch (erro) {
+        mensagem.textContent = erro.message ||
+          "Não foi possível criar sua conta.";
+      } finally {
+        botao.disabled = false;
+      }
+    });
 }
+
+function renderLogin() {
+  document.getElementById("registerBody").innerHTML = `
+    <div class="detail-card">
+      <h2>Entrar na Venzuno</h2>
+      <p>Acesse sua conta com e-mail e senha.</p>
+
+      <form id="venzunoLoginForm">
+        <label for="loginEmail">E-mail</label>
+        <input class="field" id="loginEmail"
+          type="email" autocomplete="email" required>
+
+        <label for="loginPassword">Senha</label>
+        <input class="field" id="loginPassword"
+          type="password" autocomplete="current-password" required>
+
+        <button class="btn primary full" type="submit">
+          Entrar
+        </button>
+      </form>
+
+      <p id="loginMessage" class="notice" role="status"></p>
+
+      <button class="btn outline full"
+        type="button" onclick="renderRegister()">
+        Criar conta gratuita
+      </button>
+    </div>
+  `;
+
+  document.getElementById("venzunoLoginForm")
+    .addEventListener("submit", async function(event) {
+      event.preventDefault();
+
+      const email = document.getElementById("loginEmail").value.trim();
+      const senha = document.getElementById("loginPassword").value;
+      const mensagem = document.getElementById("loginMessage");
+      const botao = this.querySelector("button[type=submit]");
+
+      botao.disabled = true;
+      mensagem.textContent = "Entrando...";
+
+      try {
+        await entrarUsuario(email, senha);
+        mensagem.textContent = "Login realizado com sucesso!";
+      } catch (erro) {
+        mensagem.textContent =
+          "Não foi possível entrar. Confira seu e-mail, senha e confirmação da conta.";
+      } finally {
+        botao.disabled = false;
+      }
+    });
+}
+
 function createCard(){
 const name=document.getElementById("memberName").value.trim();
 if(name.length<2){alert("Digite um nome com pelo menos 2 caracteres.");return;}
