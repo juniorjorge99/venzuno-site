@@ -558,6 +558,59 @@ async function alternarBeneficioVenzuno(companyId, beneficio) {
   }
 }
 
+async function editarBeneficioVenzuno(companyId, beneficio) {
+  const titulo = prompt("Nome do benefício:", beneficio.title);
+  if (titulo === null) return;
+
+  if (!titulo.trim()) {
+    alert("O nome não pode ficar vazio.");
+    return;
+  }
+
+  const descontoTexto = prompt(
+    "Desconto em %:",
+    beneficio.discount_percent
+  );
+  if (descontoTexto === null) return;
+
+  const desconto = Number(descontoTexto.replace(",", "."));
+
+  if (!descontoTexto.trim() ||
+      !Number.isFinite(desconto) ||
+      desconto < 0 || desconto > 100) {
+    alert("Informe um desconto válido de 0 a 100%.");
+    return;
+  }
+
+  const condicoes = prompt(
+    "Condições do benefício:",
+    beneficio.conditions || ""
+  );
+  if (condicoes === null) return;
+
+  try {
+    const { error } = await venzunoAuth.rpc(
+      "gerenciar_beneficio_venzuno",
+      {
+        p_company_id: companyId,
+        p_benefit_id: beneficio.id,
+        p_title: titulo.trim(),
+        p_discount_percent: desconto,
+        p_conditions: condicoes,
+        p_active: beneficio.active
+      }
+    );
+
+    if (error) throw error;
+
+    alert("Benefício editado com sucesso!");
+    await abrirPainelEmpresarial();
+  } catch (erro) {
+    console.error("Erro ao editar benefício:", erro);
+    alert("Não foi possível editar o benefício.");
+  }
+}
+
 async function abrirPainelEmpresarial() {
   go("business");
 
@@ -660,6 +713,15 @@ ${empresa.staff_role === "owner" ? `
     '</button>'
   : '') +
 
+
+(empresa.staff_role === "owner"
+  ? '<button class="btn outline full" style="margin-top:10px" onclick="editarBeneficioVenzuno(\'' +
+      empresa.company_id + '\', JSON.parse(decodeURIComponent(\'' +
+      encodeURIComponent(JSON.stringify(b)) +
+      '\')))">' +
+      'Editar benefício' +
+    '</button>'
+  : '') +
 
       '</div>'
     ).join("") || "<p>Nenhum benefício cadastrado.</p>"}
