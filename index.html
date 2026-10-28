@@ -650,13 +650,16 @@ ${empresa.staff_role === "owner" ? `
       '<p>' + safe(b.conditions || "Sem condições adicionais.") + '</p>' +
       '<p>Status: ' + (b.active ? "Ativo" : "Inativo") + '</p>' +
       
+
 (empresa.staff_role === "owner"
   ? '<button class="btn outline full" style="margin-top:12px" onclick="alternarBeneficioVenzuno(\'' +
-      empresa.company_id + '\', beneficios.find(b => b.id === \'' +
-      b.id + '\'))">' +
+      empresa.company_id + '\', JSON.parse(decodeURIComponent(\'' +
+      encodeURIComponent(JSON.stringify(b)) +
+      '\')))">' +
       (b.active ? 'Desativar benefício' : 'Ativar benefício') +
     '</button>'
   : '') +
+
 
       '</div>'
     ).join("") || "<p>Nenhum benefício cadastrado.</p>"}
