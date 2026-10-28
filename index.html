@@ -173,6 +173,19 @@ label{font-size:12px;font-weight:700}
 <div class="content" id="registerBody"></div>
 </section>
 
+  
+<section class="screen" id="companyRequest">
+  <div class="pagehead">
+    <div class="brand">
+      <span class="mark">V</span>venzuno<span class="dot">.</span>
+    </div>
+    <h1>Seja uma empresa parceira</h1>
+    <p>Solicite a participação da sua empresa na Venzuno.</p>
+  </div>
+
+  <div class="content" id="companyRequestBody"></div>
+</section>
+
 <section class="screen" id="card">
 <div class="pagehead">
 <div class="brand"><span class="mark">V</span>venzuno<span class="dot">.</span></div>
@@ -609,6 +622,106 @@ async function editarBeneficioVenzuno(companyId, beneficio) {
     console.error("Erro ao editar benefício:", erro);
     alert("Não foi possível editar o benefício.");
   }
+}
+
+async function abrirSolicitacaoEmpresa() {
+  go("companyRequest");
+
+  const area = document.getElementById("companyRequestBody");
+  const usuario = await usuarioAtual();
+
+  if (!usuario) {
+    area.innerHTML = `
+      <div class="detail-card">
+        <h2>Entre na sua conta</h2>
+        <p>Para solicitar o cadastro da empresa,
+        você precisa estar conectado à Venzuno.</p>
+        <button class="btn primary full"
+          onclick="go('register')">
+          Entrar ou cadastrar
+        </button>
+      </div>
+    `;
+    return;
+  }
+
+  area.innerHTML = `
+    <div class="detail-card">
+      <h2>Dados da empresa</h2>
+      <p>Preencha as informações para solicitar
+      sua participação na Venzuno.</p>
+
+      <form id="formSolicitacaoEmpresa">
+        <input name="company_name"
+          placeholder="Nome da empresa"
+          required minlength="2">
+
+        <input name="category"
+          placeholder="Segmento (ex.: Alimentação)"
+          required>
+
+        <input name="city"
+          placeholder="Cidade"
+          required>
+
+        <input name="address"
+          placeholder="Endereço">
+
+        <input name="phone"
+          placeholder="WhatsApp">
+
+        <input name="instagram"
+          placeholder="Instagram">
+
+        <textarea name="description"
+          placeholder="Conte um pouco sobre a empresa"></textarea>
+
+        <button type="submit" class="btn primary full">
+          Enviar solicitação
+        </button>
+      </form>
+    </div>
+  `;
+
+  document.getElementById("formSolicitacaoEmpresa")
+    .addEventListener("submit", async function(evento) {
+      evento.preventDefault();
+
+      const botao = this.querySelector('button[type="submit"]');
+      botao.disabled = true;
+
+      const dados = new FormData(this);
+
+      try {
+        const { error } = await venzunoAuth
+          .from("company_requests")
+          .insert({
+            user_id: usuario.id,
+            company_name: dados.get("company_name").trim(),
+            category: dados.get("category").trim(),
+            city: dados.get("city").trim(),
+            address: dados.get("address").trim(),
+            phone: dados.get("phone").trim(),
+            instagram: dados.get("instagram").trim(),
+            description: dados.get("description").trim()
+          });
+
+        if (error) throw error;
+
+        area.innerHTML = `
+          <div class="detail-card">
+            <h2>Solicitação enviada!</h2>
+            <p>Sua empresa será analisada
+            pela equipe Venzuno.</p>
+            <p>Status: Pendente</p>
+          </div>
+        `;
+      } catch (erro) {
+        console.error("Erro na solicitação:", erro);
+        alert("Não foi possível enviar. Tente novamente.");
+        botao.disabled = false;
+      }
+    });
 }
 
 async function abrirPainelEmpresarial() {
