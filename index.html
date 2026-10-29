@@ -211,7 +211,23 @@ label{font-size:12px;font-weight:700}
     </div>
   </div>
 </section>
+<section class="screen" id="admin">
+  <div class="pagehead">
+    <div class="brand">
+      <span class="mark">V</span>
+      venzuno<span class="dot">.</span>
+    </div>
+    <h1>Painel Administrativo</h1>
+    <p>Gerencie as solicitações de empresas parceiras.</p>
+  </div>
 
+  <div class="content" id="adminBody">
+    <div class="detail-card">
+      <h2>Solicitações de empresas</h2>
+      <p>Carregando solicitações...</p>
+    </div>
+  </div>
+</section>
 <nav class="bottomnav">
 <button data-page="home" onclick="go('home')"><b>⌂</b>Início</button>
 <button data-page="companies" onclick="go('companies')"><b>▦</b>Empresas</button>
@@ -219,7 +235,9 @@ label{font-size:12px;font-weight:700}
 <button data-page="card" onclick="go('card')"><b>▣</b>Cartão</button>
   
 <button data-page="business" onclick="abrirPainelEmpresarial()"><b>▦</b>Painel</button>
-
+<button data-page="admin" onclick="go('admin')">
+  <b>⚙</b>Admin
+</button>
 </nav>
 </div>
 
@@ -239,6 +257,7 @@ if(page==="home")render("homeList",document.getElementById("homeSearch").value);
 if(page==="companies")render("companyList",document.getElementById("companySearch").value);
 if(page==="register")renderRegister();
 if(page==="card")renderCard();
+  if(page==="admin")abrirPainelAdministrativo();
 window.scrollTo(0,0);
 }
 function cover(c,extra=""){
@@ -872,7 +891,63 @@ ${empresa.staff_role === "owner" ? `
     `;
   }
 }
+async function abrirPainelAdministrativo() {
+  const area = document.getElementById("adminBody");
 
+  area.innerHTML = `
+    <div class="detail-card">
+      <h2>Solicitações de empresas</h2>
+      <p>Verificando acesso administrativo...</p>
+    </div>
+  `;
+
+  try {
+    const usuario = await usuarioAtual();
+
+    if (!usuario) {
+      area.innerHTML = `
+        <div class="detail-card">
+          <h2>Acesso restrito</h2>
+          <p>Entre na sua conta para continuar.</p>
+        </div>
+      `;
+      return;
+    }
+
+    const { data, error } = await venzunoAuth.rpc(
+      "venzuno_admin_solicitacoes"
+    );
+
+    if (error) throw error;
+
+    const solicitacoes = data || [];
+
+    area.innerHTML = `
+      <div class="detail-card">
+        <h2>Solicitações de empresas</h2>
+        <p>Total: ${solicitacoes.length}</p>
+        ${solicitacoes.map(s => `
+          <div class="detail-card" style="margin-top:16px">
+            <h3>${safe(s.company_name)}</h3>
+            <p>Segmento: ${safe(s.category || "Não informado")}</p>
+            <p>Cidade: ${safe(s.city || "Não informada")}</p>
+            <p>Status: <strong>${safe(s.status)}</strong></p>
+          </div>
+        `).join("") || "<p>Nenhuma solicitação encontrada.</p>"}
+      </div>
+    `;
+
+  } catch (erro) {
+    console.error("Erro no painel administrativo:", erro);
+
+    area.innerHTML = `
+      <div class="detail-card">
+        <h2>Acesso não autorizado ou indisponível</h2>
+        <p>Não foi possível carregar as solicitações.</p>
+      </div>
+    `;
+  }
+}
 render("homeList");
 render("companyList");
 </script>
